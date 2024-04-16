@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Stop
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -18,12 +18,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.ButtonDefaults
-import androidx.wear.compose.material.ExperimentalWearMaterialApi
-import androidx.wear.compose.material.Text
-import androidx.wear.compose.material.rememberSwipeableState
 import androidx.wear.compose.ui.tooling.preview.WearPreviewDevices
 import androidx.wear.compose.ui.tooling.preview.WearPreviewFontScales
 import com.example.android.wearable.composestarter.presentation.components.DurationText
@@ -47,14 +43,13 @@ fun HomeScreen( onShowList: () -> Unit) {
     val duration = secondsElapsed * 1000L
 
     var displayIcon = Icons.Filled.PlayArrow
-    if(isRunning) displayIcon = Icons.Default.Clear
+    if(isRunning) displayIcon = Icons.Filled.Stop
 
     ScreenScaffold(scrollState = scrollState) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .rotaryWithScroll(scrollState)
-
                 .padding(32.dp),
         ) {
             Box(
@@ -68,8 +63,8 @@ fun HomeScreen( onShowList: () -> Unit) {
                 ) {
                     Button(
                         imageVector = displayIcon,
-                        "desc",
-                        colors = ButtonDefaults.secondaryButtonColors(),
+                        "Start or Stop Timer",
+                        colors = ButtonDefaults.iconButtonColors(),
                         onClick ={
                             if (isRunning) {timer?.cancel() }else{
                                 secondsElapsed = 0
@@ -81,8 +76,8 @@ fun HomeScreen( onShowList: () -> Unit) {
                     )
                     Button(
                         imageVector = Icons.Filled.Settings,
-                        "desc",
-                        colors = ButtonDefaults.secondaryButtonColors(),
+                        "Navigate to settings",
+                        colors = ButtonDefaults.iconButtonColors(),
                         modifier = Modifier.offset(y = 16.dp, x = 32.dp),
                         onClick = onShowList,
                     )
@@ -90,11 +85,6 @@ fun HomeScreen( onShowList: () -> Unit) {
                 }
             }
 
-        }
-        Column(
-
-        ){
-            Text(text = "Banana")
         }
     }
 }

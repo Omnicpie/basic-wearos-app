@@ -87,6 +87,7 @@ dependencies {
     // Foundation is additive, so you can use the mobile version in your Wear OS app.
     implementation libs.wear.compose.foundation
     implementation(libs.androidx.material.icons.core)
+    implementation libs.androidx.material.icons.extended
 
     // Horologist for correct Compose layout
     implementation libs.horologist.composables
