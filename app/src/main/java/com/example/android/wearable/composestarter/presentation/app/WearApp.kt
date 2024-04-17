@@ -6,6 +6,7 @@ import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import com.example.android.wearable.composestarter.presentation.screens.HomeScreen
+import com.example.android.wearable.composestarter.presentation.screens.InProgressSessionScreen
 import com.example.android.wearable.composestarter.presentation.screens.ListScreen
 import com.example.android.wearable.composestarter.presentation.theme.WearAppTheme
 import com.google.android.horologist.compose.layout.AppScaffold
@@ -18,10 +19,15 @@ fun WearApp() {
 
     WearAppTheme {
         AppScaffold {
-            SwipeDismissableNavHost(navController = navController, startDestination = "menu") {
-                composable("menu") {
+            SwipeDismissableNavHost(navController = navController, startDestination = "home") {
+                composable("home"){
                     HomeScreen(
-                        onShowList = { navController.navigate("side") }
+                        nav = navController
+                    )
+                }
+                composable("current") {
+                    InProgressSessionScreen(
+                        nav = navController
                     )
                 }
                 composable("side") {
